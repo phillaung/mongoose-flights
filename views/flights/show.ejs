@@ -1,6 +1,6 @@
 <%- include('../partials/header.ejs') %>
 
-    <h3>Airline : <%= flight.airline %></h3>
+    <p>Airline : <%= flight.airline %></p>
     <p>Airport : <%= flight.airport %></p>
     <p>Flight No. : <%= flight.flightNo %></p>
     <p>Departs : <%= flight.departs %></p>
@@ -43,5 +43,28 @@
         <input type="datetime-local" name="arrival">
         <button type="submit">Add Destination</button>
     </form>
+
+    <br><br><h3>Tickets</h3>
+    <% if (tickets.length) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Seat</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% tickets.forEach(function (t) { %>
+                    <tr>
+                        <td><%= t.seat %></td>
+                        <td><%= t.price %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>No Tickets Yet</p>
+    <% } %>
+    <button><a href="/flights/<%= flight._id %>/tickets/new">Add Ticket</a></button>
 
 <%- include('../partials/footer.ejs') %>
