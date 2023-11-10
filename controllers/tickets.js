@@ -18,7 +18,19 @@ async function create(req, res) {
     }
 }
 
+async function deleteTicket(req, res) {
+    const ticketId = new mongoose.Types.ObjectId(req.params.ticketId);
+    try {
+        await Ticket.deleteOne({ _id: ticketId });
+        res.redirect(`/flights/${req.params.flightId}`);
+    } catch (err) {
+        console.log(err)
+        res.redirect(`/flights/${req.params.flightId}`);
+    }
+}
+
 module.exports = {
     new: newTicket,
     create,
+    delete: deleteTicket
 };
